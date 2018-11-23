@@ -1,0 +1,20 @@
+#20181029--20181030
+##java概述
+###1.java的环境的配置
+####J2SE(Java2 Platform Standared Edition)java2平台标准版,它包含了JVM、JDK、JRE和Java语言(包含了API),它是基础[这是我们需要学习的东西]
+####JVM:Java Virtual Machine,java虚拟机,将java编译好的文件翻译成机器可以识别的语言
+####JDK:Java Development Kit,java开发工具包
+####JRE:Java Runtime env,java运行时环境
+####J2EE(Java2 Platform Enterprise Edition)[java企业级平台，主要是开发一些Web程序]
+####J2ME(Java2 Platform Micor Edition)
+####java安装好的目录,jdk文件夹中的目录解释
+#####bin:存放的二进制文件,都是一些可执行文件,其中我们常用的javac,java,javadoc
+#####include:存放的是一些c语言的文件,一些底层实现
+#####lib:存放的是类库
+####java环境的配置,需要配置jdk中的bin目录,path=;***/bin;
+
+#20181031--2018
+###2.java程序的执行编译过程
+####java编码，windows创建的文件默认的是ANSI，也就是GB2312;如果你编辑的时候用UTF-8,就会出现乱码了
+####
+####

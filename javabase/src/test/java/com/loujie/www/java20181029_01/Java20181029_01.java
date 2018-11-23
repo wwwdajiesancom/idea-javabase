@@ -10,7 +10,8 @@ public class Java20181029_01 {
 
     @Test
     public void test_01() {
-        System.out.println("-----------------------------");
+        
+
     }
 
 

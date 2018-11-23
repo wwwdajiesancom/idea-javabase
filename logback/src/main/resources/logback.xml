@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!--需要slf4j,logback-core,logback-access,logback-classic4个基础包-->
+
+    <!--
+        定义的一些属性变量,将一些常用的东西定义到一起
+     -->
+    <!--项目名称-->
+    <property name="projectName" value="study-logback-test"/>
+    <!--格式-->
+    <property name="appender.encoder.pattern"
+              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] | [%-5level] | [%thread] | [%logger{10}] | [%method] | %msg%n"/>
+    <!--日志存放目录-->
+    <property name="log.path" value="/logs/logback/"/>
+    <!--日志保存期限,单位月-->
+    <property name="maxHistory" value="6" />
+
+    <!--设置项目的名称,作为在多个日志系统中的唯一识别标志-->
+    <contextName>${projectName}</contextName>
+
+    <!--
+        定义日志模块
+        主要是定义日志的输出地方、输出方式
+    -->
+    <!--定义日志输出的位置,控制台-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${appender.encoder.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!--生成每天的日志模版-->
+    <!-- name,及file中的名称,fileNamePattern中的名称需要修改 -->
+    <appender name="alllog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}alllog.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>alllog.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${appender.encoder.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--filter,限制只能记录一种类型的日志;一般不用
+        他是直接放入appender标签中的一项
+        filter的class也有几种，不过用的时候可以重新查询
+    -->
+    <!-- <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>info</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter> -->
+
+    <!--logger,用来设置某一个包或具体的某一个类的日志打印级别、以及指定appender。loger仅有一个name属性，一个可选的level和一个可选的addtivity属性。
+        name: 用来指定受此loger约束的某一个包或者具体的某一个类。
+        level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL和OFF，还有一个特俗值INHERITED或者同义词NULL，代表强制执行上级的级别。 如果未设置此属性，那么当前loger将会继承上级的级别。
+        addtivity: 是否向上级loger传递打印信息。默认是true。同loger一样，可以包含零个或多个appender-ref元素，标识这个appender将会添加到这个loger。
+     -->
+
+    <!--将包com.loujie.www.test中的内容输入到alllog中-->
+    <logger name="com.loujie.www.test" level="info" addtivity="true">
+        <appender-ref ref="alllog"/>
+    </logger>
+
+    <!--子节点root:它也是loger元素，但是它是根loger,是所有loger的上级。只有一个level属性，因为name已经被命名为"root",且已经是最上级了。-->
+    <root level="debug">
+        <!--输出到控制台-->
+        <appender-ref ref="console"/>
+    </root>
+
+    <!--
+        使用手册:
+        如果要增加内容,就复制一个appender标签,然后在创建一个logger标签,让她们对应
+        如果需要记录错误、警告就需要复制一个appender标签,这个标签增加filter标签,将需要的级别给放上去
+    -->
+</configuration>
