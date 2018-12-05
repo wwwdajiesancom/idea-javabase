@@ -9,7 +9,7 @@
     <property name="projectName" value="study-logback-test"/>
     <!--格式-->
     <property name="appender.encoder.pattern"
-              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] | [%-5level] | [%thread] | [%logger{10}] | [%method] | %msg%n"/>
+              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}]|[%-5level]|[%thread]|[%logger{10}]|[%method] | %msg%n"/>
     <!--日志存放目录-->
     <property name="log.path" value="/logs/logback/"/>
     <!--日志保存期限,单位月-->
@@ -31,11 +31,11 @@
     </appender>
     <!--生成每天的日志模版-->
     <!-- name,及file中的名称,fileNamePattern中的名称需要修改 -->
-    <appender name="alllog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}alllog.log</file>
+    <appender name="template" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}template.log</file>
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>alllog.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}template.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>${maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -62,7 +62,7 @@
 
     <!--将包com.loujie.www.test中的内容输入到alllog中-->
     <logger name="com.loujie.www.test" level="info" addtivity="true">
-        <appender-ref ref="alllog"/>
+        <appender-ref ref="template"/>
     </logger>
 
     <!--子节点root:它也是loger元素，但是它是根loger,是所有loger的上级。只有一个level属性，因为name已经被命名为"root",且已经是最上级了。-->
