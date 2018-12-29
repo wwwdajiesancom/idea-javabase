@@ -11,6 +11,27 @@
 
     <artifactId>logback</artifactId>
 
+    <profiles>
+        <profile>
+            <id>deploy</id>
+            <properties>
+                <profile.env>deploy</profile.env>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <profile.env>test</profile.env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
     <dependencies>
         <!-- 测试用例,引入junit -->
         <dependency>
@@ -39,8 +60,21 @@
             <version>1.7.25</version>
         </dependency>
 
-
-
     </dependencies>
+
+    <build>
+
+        <filters>
+            <filter>src/main/filters/${profile.env}-filter.properties</filter>
+        </filters>
+
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources/</directory>
+            </resource>
+        </resources>
+
+    </build>
 
 </project>

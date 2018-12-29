@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-    <!--项目名称-->
     <property name="projectName" value="study-logback-test"/>
-    <!--格式-->
     <property name="appender.encoder.pattern"
               value="[%d{yyyy-MM-dd HH:mm:ss.SSS}]|[%-5level]|[%thread]|[%logger{10}]|[%method] | %msg%n"/>
-    <!--日志存放目录-->
-    <property name="log.path" value="/logs/logback/"/>
-    <!--日志保存期限,单位月-->
-    <property name="maxHistory" value="36" />
+    <property name="log.path" value="/logs/logback/" />
+    <property name="maxHistory" value="3660" />
 
-    <!--设置项目的名称,作为在多个日志系统中的唯一识别标志-->
     <contextName>${projectName}</contextName>
 
-    <!--定义日志输出的位置,控制台-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${appender.encoder.pattern}</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
-    <!--生成每天的日志模版-->
+
     <appender name="template" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}template.log</file>
+        <file>${log.path}/template.log</file>
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}template.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}/template.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>${maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -34,11 +28,12 @@
         </encoder>
     </appender>
 
-    <logger name="com.loujie.www.test" level="info" addtivity="true">
+    <logger name="com.loujie.www.test" level="info" additivity="true">
         <appender-ref ref="template"/>
     </logger>
 
-    <root level="debug">
+    <root level="ERROR">
         <appender-ref ref="console"/>
     </root>
+
 </configuration>
