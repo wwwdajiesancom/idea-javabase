@@ -15,6 +15,7 @@
         <module>nodejs</module>
         <module>http</module>
         <module>json</module>
+        <module>sync</module>
     </modules>
 
     <dependencies>
