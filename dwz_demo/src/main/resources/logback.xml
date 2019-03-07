@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <property name="projectName" value="dwz_demo"/>
+    <property name="appender.encoder.pattern"
+              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}]|[%-5level]|[%thread]|[%logger{10}]|[%method] | %msg%n"/>
+    <property name="appender.encoder.pattern2"
+              value="%msg%n"/>
+    <property name="log.path" value="${logback.log.path}" />
+    <property name="rootLevel" value="${logback.root.level}"/>
+    <property name="maxHistory" value="3660" />
+
+    <contextName>${projectName}</contextName>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${appender.encoder.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/rolling.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/rolling.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${appender.encoder.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="task" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/task.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/task.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${appender.encoder.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="demo" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/demo.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/demo.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${appender.encoder.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="com.loujie.www.dwz" level="${rootLevel}" additivity="${logback.root.additivity}">
+        <appender-ref ref="rolling" />
+    </logger>
+
+    <root level="${rootLevel}">
+        <appender-ref ref="console"/>
+    </root>
+
+</configuration>
