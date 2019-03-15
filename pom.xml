@@ -17,6 +17,8 @@
         <module>json</module>
         <module>sync</module>
         <module>excel</module>
+        <module>rabbitmq</module>
+        <module>mqtt</module>
 
     </modules>
 
