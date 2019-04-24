@@ -25,7 +25,7 @@ public class EMQTTClient {
     public final static int SEND_BUFFER_SIZE = 64;// 发送最大缓冲为2M
 
     public static Topic[] topics = {
-            new Topic("jiaoyubao/login/app123", QoS.AT_MOST_ONCE)};  // 0 至多一次
+            new Topic("jiaoyubao/open_order/201904241411047LgE1", QoS.AT_MOST_ONCE)};  // 0 至多一次
 
     private final static String CLIENT_ID = "client" + UUID.randomUUID().toString().replace("-", "");
 
@@ -62,6 +62,7 @@ public class EMQTTClient {
         while (true) {
             Future<Message> futrueMessage = connection.receive();
             Message message = null;
+            System.out.println("start:await()");
             try {
                 message = futrueMessage.await();
             } catch (Exception e) {

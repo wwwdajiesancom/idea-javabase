@@ -1,11 +1,14 @@
 package com.loujie.www.server;
 
-import org.fusesource.mqtt.client.FutureConnection;
-import org.fusesource.mqtt.client.MQTT;
-import org.fusesource.mqtt.client.QoS;
-import org.fusesource.mqtt.client.Topic;
+import com.alibaba.druid.support.json.JSONUtils;
+import jdk.nashorn.internal.parser.JSONParser;
+import jdk.nashorn.internal.runtime.JSONFunctions;
+import org.fusesource.mqtt.client.*;
 
 import java.net.URISyntaxException;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @name loujie
@@ -72,11 +75,19 @@ public class EMQTTServer {
         count++;
         // 用于发布消息，目前手机段不需要向服务端发送消息
         //主题的内容
-        String message = "Hello " + count + " MQTT..." + System.currentTimeMillis();
-        String topic = "jiaoyubao/login/123";
-        connection.publish(topic, message.getBytes(), QoS.AT_LEAST_ONCE,
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 1);
+        map.put("orderNo", "201904241411047LgE1");
+        map.put("date", Calendar.getInstance().getTimeInMillis());
+        String message = JSONUtils.toJSONString(map);
+        String topic = "jiaoyubao/open_order/app1234";
+        Future<Void> future = connection.publish(topic, message.getBytes(), QoS.AT_LEAST_ONCE,
                 false);
-        Thread.sleep(3000);
+        try {
+            future.await();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("MQTTFutureServer.publish Message " + "Topic Title :" + topic + " context :" + message);
     }
 
