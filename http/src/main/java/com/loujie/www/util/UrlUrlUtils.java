@@ -19,9 +19,9 @@ public class UrlUrlUtils {
         String getParam = UrlParamUtils.getParam(params);
         if (getParam != null && !getParam.isEmpty()) {
             if (url.contains("?")) {
-                url += url + "&" + getParam;
+                url += "&" + getParam;
             } else {
-                url += url + "?" + getParam;
+                url += "?" + getParam;
             }
         }
         return url;

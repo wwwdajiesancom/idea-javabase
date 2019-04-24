@@ -9,6 +9,7 @@ import org.fusesource.mqtt.client.QoS;
 import org.fusesource.mqtt.client.Topic;
 
 import java.net.URISyntaxException;
+import java.util.UUID;
 
 /**
  * @name loujie
@@ -16,7 +17,7 @@ import java.net.URISyntaxException;
  */
 public class EMQTTClient {
 
-    private static final String host = "lm.loujie.com";
+    private static final String host = "118.144.248.25";// "lm.loujie.com";
     private static final int port = 1883;
     public final static long RECONNECTION_ATTEMPT_MAX = 6;
     public final static long RECONNECTION_DELAY = 2000;
@@ -24,11 +25,9 @@ public class EMQTTClient {
     public final static int SEND_BUFFER_SIZE = 64;// 发送最大缓冲为2M
 
     public static Topic[] topics = {
-//            new Topic("/talk/login", QoS.EXACTLY_ONCE), //  2 只有一次
-//            new Topic("/talk/login", QoS.AT_LEAST_ONCE),  // 1 至少一次
-            new Topic("/talk/bbbb", QoS.AT_MOST_ONCE)};  // 0 至多一次
+            new Topic("jiaoyubao/login/app123", QoS.AT_MOST_ONCE)};  // 0 至多一次
 
-    private final static String CLIENT_ID = "client";
+    private final static String CLIENT_ID = "client" + UUID.randomUUID().toString().replace("-", "");
 
     public static void main(String[] args) {
 
@@ -48,12 +47,17 @@ public class EMQTTClient {
             mqtt.setSendBufferSize(SEND_BUFFER_SIZE);
             //设置客户端id
             mqtt.setClientId(CLIENT_ID);
+
+            mqtt.setUserName("client");
+            mqtt.setPassword("client1");
+
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
 
         final FutureConnection connection = mqtt.futureConnection();
         connection.connect();
+
         connection.subscribe(topics);
         while (true) {
             Future<Message> futrueMessage = connection.receive();

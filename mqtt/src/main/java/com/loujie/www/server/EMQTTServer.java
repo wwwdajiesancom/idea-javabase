@@ -13,14 +13,14 @@ import java.net.URISyntaxException;
  */
 public class EMQTTServer {
 
-    private static final String host = "lm.loujie.com";
+    private static final String host = "118.144.248.25";//"lm.loujie.com";
     private static final int port = 1883;
 
     private final static boolean CLEAN_START = true;
     private final static String CLIENT_ID = "server";
     private final static short KEEP_ALIVE = 30;// 低耗网络，但是又需要及时获取数据，心跳30s
 
-    public static Topic[] topics = {
+    public static Topic[] topics2 = {
             new Topic("/talk/login", QoS.EXACTLY_ONCE), // 2  只有一次
             new Topic("/talk/login", QoS.AT_LEAST_ONCE),  // 1 至少一次
             new Topic("/talk/login", QoS.AT_MOST_ONCE)};  // 0 至多一次
@@ -30,7 +30,7 @@ public class EMQTTServer {
 
     public final static int SEND_BUFFER_SIZE = 64;// 发送最大缓冲
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         MQTT mqtt = new MQTT();
         try {
             //==MQTT设置说明
@@ -43,6 +43,9 @@ public class EMQTTServer {
             //设置客户端id,用于设置客户端会话的ID。在setCleanSession(false);被调用时，MQTT服务器利用该ID获得相应的会话。
             //此ID应少于23个字符，默认根据本机地址、端口和时间自动生成
             mqtt.setClientId(CLIENT_ID);
+
+            mqtt.setUserName("server");
+            mqtt.setPassword("server1");
 
             //==失败重连接设置说明
             //设置重新连接的次数 ,客户端已经连接到服务器，但因某种原因连接断开时的最大重试次数，超出该次数客户端将返回错误。-1意为无重试上限，默认为-1
@@ -66,16 +69,15 @@ public class EMQTTServer {
         final FutureConnection connection = mqtt.futureConnection();
         connection.connect();
         int count = 1;
-        while (true) {
-            count++;
-            // 用于发布消息，目前手机段不需要向服务端发送消息
-            //主题的内容
-            String message = "Hello " + count + " MQTT...";
-            String topic = "/talk/login";
-            connection.publish(topic, message.getBytes(), QoS.AT_LEAST_ONCE,
-                    false);
-            System.out.println("MQTTFutureServer.publish Message " + "Topic Title :" + topic + " context :" + message);
-        }
+        count++;
+        // 用于发布消息，目前手机段不需要向服务端发送消息
+        //主题的内容
+        String message = "Hello " + count + " MQTT..." + System.currentTimeMillis();
+        String topic = "jiaoyubao/login/123";
+        connection.publish(topic, message.getBytes(), QoS.AT_LEAST_ONCE,
+                false);
+        Thread.sleep(3000);
+        System.out.println("MQTTFutureServer.publish Message " + "Topic Title :" + topic + " context :" + message);
     }
 
 }

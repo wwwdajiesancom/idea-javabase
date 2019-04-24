@@ -6,9 +6,11 @@ import java.util.Map;
 
 public class HttpUrlUtils {
 
+    private static final String DEFAULT_FILE_PATH = System
+            .getProperty("java.io.tmpdir");
+
     public static void main(String[] args) {
-        String result = GET.run("http://hls.video.pthv.gitv.tv/data/video/2018/392826/1M720P.m3u8?jiao_yu=0");
-        System.out.println(result);
+        System.out.println(DEFAULT_FILE_PATH);
     }
 
     private static final int timeout = 5000;
