@@ -50,7 +50,7 @@ public class CaptchaController {
         ccs.setHeight(30);
     }
 
-    @RequestMapping(value = "/captcha.jpg", method = RequestMethod.GET)
+    @RequestMapping(value = "/captcha.png", method = RequestMethod.GET)
     public void generateCaptcha(HttpServletRequest request, HttpServletResponse response, Long datelong) throws IOException {
         this.setResponseHeaders(response);
         // 更改图片

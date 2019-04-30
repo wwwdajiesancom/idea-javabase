@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="include.inc.jsp" %>
+<%@include file="common/include.inc.jsp" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -61,7 +61,7 @@
                 </p>
                 <p>
                     <label>验证码：</label>
-                    <span><img src="${contextPath}/captcha.jpg" alt="刷新更新验证码" style="width: 75px;height: 30px;" id="captchaImg"/></span>
+                    <span><img src="${contextPath}/captcha.png" alt="刷新更新验证码" style="width: 75px;height: 30px;" id="captchaImg"/></span>
                     <input class="code" type="text" style="width: 70px;height: 30px;" name="captcha_key" id="captcha_key" required/>
                 </p>
                 <div class="login_bar" style="disply: block; float: left;">

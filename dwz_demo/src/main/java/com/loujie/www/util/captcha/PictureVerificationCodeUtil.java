@@ -6,13 +6,13 @@ import org.patchca.service.Captcha;
 import org.patchca.service.ConfigurableCaptchaService;
 import org.patchca.utils.encoder.EncoderHelper;
 import org.patchca.word.RandomWordFactory;
-import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -126,8 +126,7 @@ public class PictureVerificationCodeUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        BASE64Encoder encoder = new BASE64Encoder();
-        String base64Img = encoder.encode(outputStream.toByteArray());
+        String base64Img = Base64.getEncoder().encodeToString(outputStream.toByteArray());
         returnMap.put("pic_bin", base64Img);
         return returnMap;
     }
