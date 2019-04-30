@@ -19,41 +19,41 @@ public class UnifiedorderReqData extends ToMapReqData {
 
     private static final long serialVersionUID = 6626515408033673872L;
 
-    private String appid;// 公众账号ID,(32)必填
-    private String mch_id;// 商户号,(32)必填
-    private String device_info = "WEB";// 设备号,因为是PC端的,所以传WEB
-    private String nonce_str;// 随机字符串,(32),必填
-    private String sign;// 签名,(32)
+    public String appid;// 公众账号ID,(32)必填
+    public String mch_id;// 商户号,(32)必填
+    public String device_info = "WEB";// 设备号,因为是PC端的,所以传WEB
+    public String nonce_str;// 随机字符串,(32),必填
+    public String sign;// 签名,(32)
 
     /**
      * start** 订单信息 **end
      **/
 
-    private String out_trade_no;// 商户订单号,(32)必填
-    private String body;// 商品描述,(128),必填,需要特定的命名规则,[浏览器打开的网站主页title名
+    public String out_trade_no;// 商户订单号,(32)必填
+    public String body;// 商品描述,(128),必填,需要特定的命名规则,[浏览器打开的网站主页title名
     // -商品概述]必填,[京东商城订单]
-    private String fee_type = "CNY";// 货币类型,默认人民币
-    private String total_fee;// 订单总金额,单位:分,必填
+    public String fee_type = "CNY";// 货币类型,默认人民币
+    public String total_fee;// 订单总金额,单位:分,必填
 
     // 下面是关联参数
-    private String trade_type = "NATIVE";
-    private String product_id;// 商品ID
-    private String spbill_create_ip;// 终端Ip
+    public String trade_type = "NATIVE";
+    public String product_id;// 商品ID
+    public String spbill_create_ip;// 终端Ip
 
     /**
      * start** 订单信息 **end
      **/
 
-    private String notify_url;// 异步同通知url,必填
+    public String notify_url;// 异步同通知url,必填
 
     /**
      * start** 可选扩展参数 **end
      **/
 
-    private String openid;// trade_type=JSAPI时（即JSAPI支付），此参数必传，此参数为微信用户在商户对应appid下的唯一标识
-    private String attach;// 附加数据,127,可以标记是那种产品,那个平台上的
-    private String time_start;// 交易起始时间,format:yyyyMMddHHmmss
-    private String time_expire;// 交易结束时间,yyyyMMddHHmmss,最短失效时间间隔必须大于5分钟
+    public String openid;// trade_type=JSAPI时（即JSAPI支付），此参数必传，此参数为微信用户在商户对应appid下的唯一标识
+    public String attach;// 附加数据,127,可以标记是那种产品,那个平台上的
+    public String time_start;// 交易起始时间,format:yyyyMMddHHmmss
+    public String time_expire;// 交易结束时间,yyyyMMddHHmmss,最短失效时间间隔必须大于5分钟
 
     /**
      * start** 可选扩展参数 **end
