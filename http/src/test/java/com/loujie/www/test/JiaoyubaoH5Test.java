@@ -17,7 +17,6 @@ import java.util.concurrent.Executors;
 public class JiaoyubaoH5Test implements IBaseTest {
 
 
-
     private String scene = "FORGET_PWD";
 
     // 1.图片验证码
@@ -108,6 +107,11 @@ public class JiaoyubaoH5Test implements IBaseTest {
             paraMap.put("userName", "18234004832");
             paraMap.put("password", "11111111g");
 
+            paraMap.put("userName", "18513108536");
+            paraMap.put("password", "q11111111");
+
+            paraMap.put("userName", "17610176980");
+            paraMap.put("password", "A123456");
 
             String result = OkHttpUtils.POST.run(this.getUrl("/login"), paraMap);
             System.out.println(result);
@@ -149,7 +153,6 @@ public class JiaoyubaoH5Test implements IBaseTest {
         this.awaits();
         System.out.println("---end");
     }
-
 
 
     @Override

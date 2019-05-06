@@ -1,5 +1,6 @@
 package com.loujie.www.dwz.controller.login;
 
+import com.loujie.www.dwz.key.UserKeys;
 import org.patchca.color.ColorFactory;
 import org.patchca.service.ConfigurableCaptchaService;
 import org.patchca.utils.encoder.EncoderHelper;
@@ -58,7 +59,7 @@ public class CaptchaController {
         // 生成验证码
         String token = EncoderHelper.getChallangeAndWriteImage(ccs, "png", response.getOutputStream());
         // 保存到session中
-        request.getSession().setAttribute("captchaToken", token);
+        request.getSession().setAttribute(UserKeys.Captcha.LoginCaptchaKey, token);
     }
 
     protected void setFilterFactory() {

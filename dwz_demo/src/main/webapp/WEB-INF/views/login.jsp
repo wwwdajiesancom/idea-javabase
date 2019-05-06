@@ -50,7 +50,7 @@
     </div>
     <div id="login_content">
         <div class="loginForm">
-            <form action="index.html" method="post" id="formId">
+            <form action="${contextPath}/login" method="post" id="formId">
                 <p>
                     <label>用户名：</label>
                     <input type="text" style="width: 150px;height: 30px;" class="login_input" name="username" id="username" required/>

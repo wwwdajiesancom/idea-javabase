@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2019/1/29
  */
 public class OkHttpUtils {
-    private static long timeout = 5;
+    private static long timeout = 10;
 
     private static OkHttpClient client = null;
 
@@ -30,6 +30,7 @@ public class OkHttpUtils {
                 .connectTimeout(timeout, TimeUnit.SECONDS)
                 .writeTimeout(timeout, TimeUnit.SECONDS)
                 .readTimeout(timeout, TimeUnit.SECONDS)
+                .callTimeout(timeout, TimeUnit.SECONDS)
                 .build();
     }
 
