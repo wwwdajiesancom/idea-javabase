@@ -9,8 +9,10 @@ import java.net.URISyntaxException;
 
 public class MqttClientUtils {
 
-    private static final String host = "118.144.248.25";
-    private static final int port = 1883;
+    //    private static final String host = "118.144.248.25";
+//    private static final int port = 1883;
+    private static final String host = "mq.pbsedu.com";
+    private static final int port = 2883;
     private static final String username = "server";
     private static final String password = "server1";
 
@@ -47,8 +49,8 @@ public class MqttClientUtils {
         //此ID应少于23个字符，默认根据本机地址、端口和时间自动生成
         mqtt.setClientId(CLIENT_ID);
 
-        mqtt.setUserName(username);
-        mqtt.setPassword(password);
+//        mqtt.setUserName(username);
+//        mqtt.setPassword(password);
 
         //==失败重连接设置说明
         //设置重新连接的次数 ,客户端已经连接到服务器，但因某种原因连接断开时的最大重试次数，超出该次数客户端将返回错误。-1意为无重试上限，默认为-1

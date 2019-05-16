@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -23,34 +24,20 @@ public class MqttTestDemo {
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    // @Test
+    @Test
     public void sha256() {
-        String result1 = StringEncrypt.String2SHA256("zhangfei");
-        String result2 = StringEncrypt.String2SHA256StrJava("server");
+        String p = "server1";UUID.randomUUID().toString().replace("-", "");
+        String result1 = StringEncrypt.string2Sha1(p);
+        String result2 = StringEncrypt.string2Sha1(p);
+        System.out.println(p);
         System.out.println(result1);
         System.out.println(result2);
     }
 
+
     @Test
     public void mst() {
         MqttClientUtils.publish("nxnxnx", "jiaoyubao/open_order/mst1");
-        for (int i = 0; i < 11; i++) {
-            int fi = i;
-            executorService.execute(() -> {
-                String date = sdf.format(Calendar.getInstance().getTime());
-                System.out.println(date + ":" + fi);
-                MqttClientUtils.publish(date + ":" + fi, "jiaoyubao/open_order/mst1");
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-        }
-
-        executorService.shutdown();
-        while (!executorService.isTerminated()) {
-        }
         System.out.println("-----end");
     }
 

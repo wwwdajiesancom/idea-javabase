@@ -4,10 +4,11 @@ import com.loujie.www.okhttp.OkHttpUtils;
 import com.loujie.www.test.base.IBaseTest;
 import org.junit.Test;
 
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * h5端的限制
@@ -99,7 +100,10 @@ public class JiaoyubaoH5Test implements IBaseTest {
     public void loginTest() {
         executorService.execute(() -> {
             Map<String, Object> paraMap = new HashMap<String, Object>();
-            paraMap.put("topic", "15838022425aa");
+            String mac = "143DF290C58F";
+            String sn = "DBD3410H1800100112";
+            String type = "1";
+            paraMap.put("topic", mac + "," + sn + "," + type);
 
             paraMap.put("userName", "15652798651");
             paraMap.put("password", "123456789a");
@@ -110,8 +114,15 @@ public class JiaoyubaoH5Test implements IBaseTest {
             paraMap.put("userName", "18513108536");
             paraMap.put("password", "q11111111");
 
-            paraMap.put("userName", "17610176980");
-            paraMap.put("password", "A123456");
+            paraMap.put("userName", "15600119310");
+            paraMap.put("password", "a123456");
+
+            paraMap.put("userName", "13321138521");
+            paraMap.put("password", "a1234568");
+
+            paraMap.put("userName", "15838022425");
+            paraMap.put("password", "a123456a");
+
 
             String result = OkHttpUtils.POST.run(this.getUrl("/login"), paraMap);
             System.out.println(result);
@@ -160,4 +171,38 @@ public class JiaoyubaoH5Test implements IBaseTest {
         return getUrlPrefix() + "/openapi/boxh5" + url_suffix;
     }
 
+    @Test
+    public void url() {
+        System.out.println(URLEncoder.encode(""));
+    }
+
+    private static final List<String> hz_list = new ArrayList<>();
+
+    static {
+        hz_list.add(".pdf");
+
+        // 图片
+        hz_list.add(".jpg");
+        hz_list.add(".jpeg");
+        hz_list.add(".png");
+        hz_list.add(".bmp");
+        hz_list.add(".gif");
+    }
+
+    @Test
+    public void url2() {
+        String credentials = null;
+        for (String credential : "aa.pdsf,bb.xpdf,x.psdf,index.pdff,2index.jpsg".split(",")) {
+            String t_hz = credential.substring(credential.lastIndexOf("."));
+            if (hz_list.contains(t_hz.toLowerCase())) {
+                if (credentials == null || credentials.isEmpty()) {
+                    credentials = credential;
+                } else {
+                    credentials += "," + credential;
+                }
+            }
+        }
+        System.out.println(credentials);
+    }
 }
+

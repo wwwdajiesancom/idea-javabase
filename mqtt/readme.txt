@@ -6,9 +6,10 @@ emq-docs:http://www.emqtt.com/docs/v3/getstarted.html
 
 
 1.配置基础环境erlang
-erlang:https://blog.csdn.net/medeuz/article/details/79571395
+    erlang:https://blog.csdn.net/medeuz/article/details/79571395
     wget http://erlang.org/download/otp_src_20.3.tar.gz
     yum -y install make gcc gcc-c++ kernel-devel m4 ncurses-devel openssl-devel unixODBC-devel libtool libtool-ltdl-devel
+    tar -zvxf otp_src_20.3.tar.gz
     cd otp
     ./otp_build autoconf
     ./configure
