@@ -1,0 +1,54 @@
+1.介绍
+
+node.js,npm
+#这是必备的环境
+node -v
+npm -v
+#安装全局的webpack
+cnpm install webpack -g
+
+#创建一个webpack
+npm init -y
+
+2.安装，配置环境
+#打包,将main.js打包到bundle.js中
+webpack main.js --output bundle.js
+
+3.想将样式css也打包成静态文件
+#安装css-loader,style-loader
+npm install css-loader style-loader
+#需要引入到js当中
+require('!style-loader!css-loader!./style.css');
+
+4.webpack的配置文件
+webpack.config.js
+    module.exports = {
+        entry:'',
+        output:{
+
+        },
+        module:{
+
+        }
+    }
+
+5.安装第三方库
+npm install jquery --save-dev
+
+引用用var $ = require('jquery');
+
+6.服务端配置
+webpack-dev-server模块安装：
+    npm install webpack-dev-server --save-dev
+
+    到webpack.config.js中配置scripts
+    webpack-dev-server --entry ./src/js/main.js --output-filename ./dist/bundle.js
+
+
+
+
+
+
+
+
+

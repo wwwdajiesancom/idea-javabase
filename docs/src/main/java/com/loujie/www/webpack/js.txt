@@ -1,0 +1,9 @@
+#新的语法
+file1.js:
+    var json = {
+        key:'afds',
+    }
+    module.exports = json;
+
+file2.js:
+    var a = require('./file1.js');

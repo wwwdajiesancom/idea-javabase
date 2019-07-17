@@ -1,0 +1,89 @@
+nginx(engine x),它是一个http和反向代理服务器；
+简单、占用内存小、并发能力强、效率高
+
+nginx与apache对比：
+    apache采用的是select模型，查询比较慢
+    nginx采用的是epoll模型，比较快速
+
+官方网站
+        http://nginx.org
+        http://www.nginx.cn/doc/
+安装：
+    #需要先安装pcre
+    yum install pcre-devel -y
+
+    wget http://nginx.org/download/nginx-1.17.0.tar.gz
+    tar -zvxf nginx-1.17.0.tar.gz
+    #修改nginx的版本,隐藏nginx的版本
+    #编辑src/core/nginx.h
+    #将 nginx_version,nginx_var修改了
+    #或者用命令：sed -i -e 's/1.17.0//g' -e 's/nginx\//JG/g' -e 's/"NGINX"/"JG"/g' src/core/nginx.h
+
+    #预编译Nginx
+    #采用nginx帐号启用
+    useradd nginx
+    ./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module
+    make
+    make install
+
+
+命令:
+    #查看版本
+    sbin/nginx -V
+    #检查配置文件是否正常,安装是否正常
+    sbin/nginx -t
+
+    #启动,这样就是直接启动了,当然也可以指定配置文件了
+    sbin/nginx
+    #nginx,启动后,一共会有2个线程，主线程，工作线程(与nginx.conf中的配置参数worker_processes有关)
+
+    #重启,
+    sbin/nginx -s reload
+    #关闭
+    sbin/nginx -s stop
+
+    #杀死
+    pkill nginx
+
+nginx.conf配置
+    # 一般是cpu的个数
+    work_processes = 1
+
+
+
+
+
+    动静分离中的upstream
+    upstream name_java_web1 {
+        server ip:port weight=1 max_fails=2 fail_timeout=30s;
+        server 127.0.0.1:8080 weight=1 max_fails=2 fail_timeout=30s;
+    }
+
+    #引入虚拟主机
+    include vhost/*.conf
+
+    www.loujie.com.conf
+    server{
+        listen 80;
+        server_name www.loujie.com www.jiege.com;
+        index index.html index.jsp index.htm;
+        root /data/web/jiaoyubao;
+
+        location / {
+            proxy_next_upstream http_502 http_504 error timeout invalid_header;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_pass http://name_java_web1;
+        }
+
+        location ~ .*\.(php|jsp|cgi|shtml)?$ {
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_xforwarded_for;
+            proxy_pass http://name_java_web1;
+        }
+
+        access_log /data/logs/name_java_web1/access.log main;
+        error_log /data/logs/name_java_web1/error.log crit;
+    }

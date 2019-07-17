@@ -108,21 +108,20 @@ public class JiaoyubaoH5Test implements IBaseTest {
             paraMap.put("userName", "15652798651");
             paraMap.put("password", "123456789a");
 
-            paraMap.put("userName", "18234004832");
-            paraMap.put("password", "11111111g");
-
             paraMap.put("userName", "18513108536");
             paraMap.put("password", "q11111111");
-
-            paraMap.put("userName", "15600119310");
-            paraMap.put("password", "a123456");
 
             paraMap.put("userName", "13321138521");
             paraMap.put("password", "a1234568");
 
-            paraMap.put("userName", "15838022425");
+            paraMap.put("userName", "pbs15838022425");
             paraMap.put("password", "a123456a");
 
+            paraMap.put("userName", "18234004832");
+            paraMap.put("password", "a123456789");
+
+            paraMap.put("userName", "15600119310");
+            paraMap.put("password", "a123456");
 
             String result = OkHttpUtils.POST.run(this.getUrl("/login"), paraMap);
             System.out.println(result);
