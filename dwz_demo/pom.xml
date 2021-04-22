@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.10</junit.version>
         <spring.version>5.0.2.RELEASE</spring.version>
-        <mybatis.version>3.4.5</mybatis.version>
+        <mybatis.version>3.5.6</mybatis.version>
         <mysql.version>5.1.43</mysql.version>
         <java.servlet.version>3.1.0</java.servlet.version>
         <jstl.version>1.2</jstl.version>
